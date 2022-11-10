@@ -5,12 +5,14 @@ import { Rules } from "./entity/Rules";
 const multer = require("multer");
 const cors = require("cors");
 const { check_assert } = require("../src/utils/index");
+const home_router = require("../src/routes/home");
 
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const objectIdInstance = require("mongodb").ObjectID;
 
+app.use("/", home_router);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,10 +24,6 @@ AppDataSource.initialize()
   .catch((err) => {
     console.error("Error during Data Source initialization", err);
   });
-
-app.get("/", async (req, res) => {
-  res.send({ code: 200, msg: "Api all ready!" });
-});
 
 // ==================  illnesses and symptom
 app.get("/illnesses", async (req, res) => {
