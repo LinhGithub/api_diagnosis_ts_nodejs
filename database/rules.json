@@ -1,0 +1,38 @@
+[{
+  "_id": {
+    "$oid": "633006b48bf5347913eb47ad"
+  },
+  "illnesses_id": "632f31c2e0786f1711bfc64a",
+  "symptoms": [
+    "632f3183e0786f1711bfc630"
+  ],
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664091808194"
+    }
+  },
+  "updated_at": {
+    "$numberLong": "1671681789770"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "633006b88bf5347913eb47b2"
+  },
+  "illnesses_id": "632f31c9e0786f1711bfc64f",
+  "symptoms": [
+    "632f3188e0786f1711bfc635",
+    "632f31c2e0786f1711bfc64a"
+  ],
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664091808194"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1664091808194"
+    }
+  },
+  "__v": 0
+}]

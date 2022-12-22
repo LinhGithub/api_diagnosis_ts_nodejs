@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "632f3183e0786f1711bfc630"
+  },
+  "name": "Ho dai dẳng",
+  "type": "symptom",
+  "rule": "only",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664036292948"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671701347319"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632f3188e0786f1711bfc635"
+  },
+  "name": "Đau đầu",
+  "type": "symptom",
+  "rule": "only",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664036292948"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671686923058"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632f31c2e0786f1711bfc64a"
+  },
+  "name": "Đau họng",
+  "type": "illness",
+  "rule": "both",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664036292948"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671713187900"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "632f31c9e0786f1711bfc64f"
+  },
+  "name": "Covid 19",
+  "type": "illness",
+  "rule": "only",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1664036292948"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671683406951"
+    }
+  },
+  "__v": 0
+}]

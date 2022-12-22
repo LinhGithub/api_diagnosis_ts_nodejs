@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "63a28f505ba56e1bb86e1062"
+  },
+  "username": "admin",
+  "role": "admin",
+  "password": "$2b$10$JjhEQ26W34wJHf9s0DKASOr/AdvDA3biuiVI1CYhUjRzuRr7emtjK",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1671597904607"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671597904607"
+    }
+  },
+  "refreshToken": "2xJi1ZMmiG5d00ez7tLWgfqaneOYKeWp3cQBH4gfDlcf7PHboCryNk6Q0FSJh8qtC2x7Uxd4YO7Cz5CVyYNaMduFdiMZ3oygUuqFj1S9BYaW3b0B5XVUSp0AiP46ZM1R"
+},{
+  "_id": {
+    "$oid": "63a29333b0df532254f9be3c"
+  },
+  "username": "demo",
+  "role": "client",
+  "password": "$2b$10$4sH7g02s1m0KIIjN0JirFOwnPDQzN1zA0jVQyJtl.qTro1tJV2DO2",
+  "created_at": {
+    "$date": {
+      "$numberLong": "1671598899068"
+    }
+  },
+  "updated_at": {
+    "$date": {
+      "$numberLong": "1671598899068"
+    }
+  },
+  "refreshToken": "SOa5boyOnDwxAtuXQyubf9vLKiUfVkR7qXbFnkUCoPc3Iu9V4N6n0CxQAyIGLIWPZgjSsvCZ9DD1zuj6k665W0Zvgooc093TM6TXeUt9Z2YdEraEXG7AqPU6UU80Rd0B"
+}]
