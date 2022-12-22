@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { User } from "./entity/User";
+import { Accounts } from "./entity/Accounts";
 import { Illnesses } from "./entity/Illnesses";
 import { Rules } from "./entity/Rules";
 
@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
   database: "test",
   synchronize: true,
   logging: false,
-  entities: [User, Illnesses, Rules],
+  entities: [Accounts, Illnesses, Rules],
   migrations: [],
   subscribers: [],
   useUnifiedTopology: true,

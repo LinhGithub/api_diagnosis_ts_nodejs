@@ -5,7 +5,22 @@ const objectIdInstance = require("mongodb").ObjectID;
 module.exports = {
   index: async function (req, res) {
     try {
-      const rules = await AppDataSource.manager.find(Rules);
+      var { page, page_size } = req.query;
+
+      var conditionObj = {};
+      if (page_size && page) {
+        page_size = Number(page_size);
+        page = Number(page);
+        conditionObj = {
+          take: page_size,
+          skip: (page - 1) * page_size,
+        };
+      }
+
+      const rules = await AppDataSource.getMongoRepository(Rules).find({
+        where: {},
+        ...conditionObj,
+      });
       const total = await AppDataSource.manager.count(Rules);
       res.send({ code: 200, msg: "success", results: rules, total: total });
     } catch {

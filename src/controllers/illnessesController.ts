@@ -6,20 +6,37 @@ const objectIdInstance = require("mongodb").ObjectID;
 module.exports = {
   index: async function (req, res) {
     try {
-      const { type, rule } = req.query;
-      var filter = {};
+      var { type, rule, page, page_size } = req.query;
+
+      var queryObj = {};
       if (type) {
-        filter["type"] = type;
+        queryObj["type"] = type;
       }
       if (rule) {
-        filter["rule"] = rule;
+        queryObj["rule"] = rule;
       }
       if (type && rule) {
-        filter = { $or: [{ type: type }, { rule: rule }] };
+        queryObj = { $or: [{ type: type }, { rule: rule }] };
       }
 
-      const illnesses = await AppDataSource.manager.find(Illnesses, filter);
-      const total = await AppDataSource.manager.count(Illnesses, filter);
+      var conditionObj = {};
+      if (page_size && page) {
+        page_size = Number(page_size);
+        page = Number(page);
+        conditionObj = {
+          take: page_size,
+          skip: (page - 1) * page_size,
+        };
+      }
+
+      const illnesses = await AppDataSource.manager
+        .getMongoRepository(Illnesses)
+        .find({
+          where: queryObj,
+          ...conditionObj,
+        });
+
+      const total = await AppDataSource.manager.count(Illnesses, queryObj);
 
       res.send({ code: 200, msg: "success", results: illnesses, total: total });
     } catch {

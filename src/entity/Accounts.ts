@@ -1,18 +1,21 @@
 import { Entity, ObjectIdColumn, ObjectID, Column } from "typeorm";
 
 @Entity()
-export class User {
+export class Accounts {
   @ObjectIdColumn()
   _id: ObjectID;
 
   @Column()
-  firstName: string;
+  username: string;
 
   @Column()
-  lastName: string;
+  password: string;
 
   @Column()
-  age: number;
+  role: string;
+
+  @Column()
+  refreshToken: string;
 
   @Column()
   created_at: Date;
