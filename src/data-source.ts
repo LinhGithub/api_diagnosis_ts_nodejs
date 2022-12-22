@@ -6,7 +6,7 @@ import { Rules } from "./entity/Rules";
 
 export const AppDataSource = new DataSource({
   type: "mongodb",
-  database: "test",
+  database: process.env.DATABASE_NAME,
   synchronize: true,
   logging: false,
   entities: [Accounts, Illnesses, Rules],
