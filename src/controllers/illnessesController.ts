@@ -6,17 +6,22 @@ const objectIdInstance = require("mongodb").ObjectID;
 module.exports = {
   index: async function (req, res) {
     try {
-      var { type, rule, page, page_size } = req.query;
+      var { type, rule, page, page_size, name } = req.query;
 
       var queryObj = {};
-      if (type) {
-        queryObj["type"] = type;
-      }
-      if (rule) {
-        queryObj["rule"] = rule;
-      }
       if (type && rule) {
         queryObj = { $or: [{ type: type }, { rule: rule }] };
+      } else {
+        if (type) {
+          queryObj["type"] = type;
+        }
+        if (rule) {
+          queryObj["rule"] = rule;
+        }
+      }
+
+      if (name) {
+        queryObj["name"] = { $regex: name, $options: "i" };
       }
 
       var conditionObj = {};

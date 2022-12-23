@@ -1,11 +1,12 @@
 import { AppDataSource } from "../data-source";
 import { Rules } from "../entity/Rules";
+import { Illnesses } from "../entity/Illnesses";
 const objectIdInstance = require("mongodb").ObjectID;
 
 module.exports = {
   index: async function (req, res) {
     try {
-      var { page, page_size } = req.query;
+      var { page, page_size, name } = req.query;
 
       var conditionObj = {};
       if (page_size && page) {
@@ -17,10 +18,33 @@ module.exports = {
         };
       }
 
-      const rules = await AppDataSource.getMongoRepository(Rules).find({
-        where: {},
-        ...conditionObj,
-      });
+      var rules = [];
+      if (name) {
+        let queryObjill = { name: { $regex: name, $options: "i" } };
+
+        let illness_ids = await AppDataSource.manager
+          .getMongoRepository(Illnesses)
+          .distinct("_id", queryObjill);
+
+        illness_ids = illness_ids.map((item) => String(item));
+
+        let queryObj = {};
+        queryObj["$or"] = [
+          { illnesses_id: { $in: illness_ids } },
+          { symptoms: { $elemMatch: { $in: illness_ids } } },
+        ];
+
+        rules = await AppDataSource.getMongoRepository(Rules).find({
+          where: queryObj,
+          ...conditionObj,
+        });
+      } else {
+        rules = await AppDataSource.getMongoRepository(Rules).find({
+          where: {},
+          ...conditionObj,
+        });
+      }
+
       const total = await AppDataSource.manager.count(Rules);
       res.send({ code: 200, msg: "success", results: rules, total: total });
     } catch {
