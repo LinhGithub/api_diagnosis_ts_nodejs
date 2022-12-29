@@ -19,6 +19,7 @@ module.exports = {
       }
 
       var rules = [];
+      var total = 0;
       if (name) {
         let queryObjill = { name: { $regex: name, $options: "i" } };
 
@@ -38,14 +39,15 @@ module.exports = {
           where: queryObj,
           ...conditionObj,
         });
+        total = await AppDataSource.manager.count(Rules, queryObj);
       } else {
         rules = await AppDataSource.getMongoRepository(Rules).find({
           where: {},
           ...conditionObj,
         });
+        total = await AppDataSource.manager.count(Rules, {});
       }
 
-      const total = await AppDataSource.manager.count(Rules);
       res.send({ code: 200, msg: "success", results: rules, total: total });
     } catch {
       (err) => {
