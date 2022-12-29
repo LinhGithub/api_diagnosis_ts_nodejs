@@ -52,6 +52,39 @@ module.exports = {
     }
   },
 
+  get_by_ids: async (req, res) => {
+    try {
+      const { list_ids } = req.body;
+      var illnesses = [];
+
+      let queryObj = {};
+      if (list_ids.length) {
+        let queryIll = {};
+        queryObj["symptoms"] = { $elemMatch: { $in: list_ids } };
+        var rules = await AppDataSource.manager
+          .getMongoRepository(Rules)
+          .distinct("symptoms", queryObj);
+
+        rules = rules.filter((item) => !list_ids.includes(item));
+        let ill_obj = rules.map((item) => objectIdInstance(item));
+
+        queryIll["_id"] = { $in: ill_obj };
+        illnesses = await AppDataSource.manager
+          .getMongoRepository(Illnesses)
+          .find({ where: queryIll });
+      } else {
+        queryObj = { $or: [{ type: "symptom" }, { rule: "both" }] };
+        illnesses = await AppDataSource.manager
+          .getMongoRepository(Illnesses)
+          .find({ where: queryObj });
+      }
+
+      res.status(200).send({ code: 200, msg: "success", results: illnesses });
+    } catch {
+      res.status(400).send({ code: 0, msg: "Có lỗi xảy ra" });
+    }
+  },
+
   create: async function (req, res) {
     try {
       const { name, type, rule } = req.body;
