@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
   try {
     const user = req.body;
     if (user) {
-      const username = user.username.toLowerCase();
+      const username = user.username;
 
       let filter: any = {
         username: username,
